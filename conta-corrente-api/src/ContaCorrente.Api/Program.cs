@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Autofac.Extensions.DependencyInjection;
+using ContaCorrente.CrossCutting;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ContaCorrente.Api
 {
@@ -19,6 +15,11 @@ namespace ContaCorrente.Api
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .ConfigureServices(services =>
+                {
+                    services.AddScoped<IApplicationStartup, ApplicationStartup>();
+                    services.AddAutofac();
+                })
                 .UseStartup<Startup>();
     }
 }

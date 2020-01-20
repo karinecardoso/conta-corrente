@@ -20,6 +20,7 @@ namespace ContaCorrente.CrossCutting
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvcCore().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddContaCorrenteDbContext(_configuration);
         }
 
         public void ConfigureContainer(ContainerBuilder builder)

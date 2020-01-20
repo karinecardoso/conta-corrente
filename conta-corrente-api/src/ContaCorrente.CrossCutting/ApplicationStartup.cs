@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using ContaCorrente.CrossCutting.Extensions.ApplicationBuilder;
 using ContaCorrente.CrossCutting.Extensions.ServiceCollection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,6 +34,7 @@ namespace ContaCorrente.CrossCutting
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseContaCorrenteSeed();
             }
 
             app.UseMvc();

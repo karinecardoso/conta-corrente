@@ -3,7 +3,7 @@
     public enum TipoTransacao
     {
         Deposito,
-        Saque,
+        Retirada,
         Pagamento
     }
 }

@@ -15,5 +15,10 @@ namespace ContaCorrente.Domain.ContasCorrentes
         public decimal Saldo { get; set; }
 
         public virtual ICollection<Transacao> Transacoes { get; set; }
+
+        public bool TemSaldoSuficiente(decimal valor)
+        {
+            return valor < Saldo;
+        }
     }
 }

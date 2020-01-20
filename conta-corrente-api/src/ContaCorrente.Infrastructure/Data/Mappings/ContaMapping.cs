@@ -8,6 +8,8 @@ namespace ContaCorrente.Infrastructure.Data.Mappings
     {
         public void Configure(EntityTypeBuilder<Conta> builder)
         {
+            builder.ToTable("contas");
+
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Agencia).IsRequired();
             builder.Property(x => x.Numero).IsRequired();

@@ -20,7 +20,10 @@ namespace ContaCorrente.CrossCutting
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvcCore().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddCors();
+            services.AddMvcCore()
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonFormatters();
             services.AddContaCorrenteDbContext(_configuration);
         }
 
@@ -37,6 +40,7 @@ namespace ContaCorrente.CrossCutting
                 app.UseContaCorrenteSeed();
             }
 
+            app.UseContaCorrenteCors();
             app.UseMvc();
         }
     }

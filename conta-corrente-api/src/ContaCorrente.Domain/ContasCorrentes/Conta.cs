@@ -18,7 +18,7 @@ namespace ContaCorrente.Domain.ContasCorrentes
 
         public bool TemSaldoSuficiente(decimal valor)
         {
-            return valor < Saldo;
+            return valor <= Saldo;
         }
     }
 }

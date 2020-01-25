@@ -30,7 +30,7 @@ namespace ContaCorrente.Api.Controllers
         [HttpGet("{idConta}/saldo")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
-        public IActionResult GetConta(int idConta)
+        public IActionResult GetSaldoConta(int idConta)
         {
             var conta = _obterContaUseCase.Execute(idConta);
 

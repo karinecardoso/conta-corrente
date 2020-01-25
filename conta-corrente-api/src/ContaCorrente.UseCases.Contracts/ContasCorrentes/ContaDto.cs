@@ -4,6 +4,8 @@ namespace ContaCorrente.UseCases.Contracts.ContasCorrentes
 {
     public class ContaDto
     {
+        public ContaDto() { }
+
         public ContaDto(Conta conta)
         {
             Id = conta.Id;

@@ -5,9 +5,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ContaCorrente.Api.Controllers
 {
+    [Produces("application/json")]
     [Route("conta")]
-    [ApiController]
-    public class TransacaoController : ControllerBase
+    public class TransacaoController : Controller
     {
         private readonly IEfetuarCreditoUseCase _efetuarCreditoUseCase;
         private readonly IEfetuarDebitoUseCase _efetuarDebitoUseCase;
@@ -38,8 +38,10 @@ namespace ContaCorrente.Api.Controllers
         /// </remarks>
         /// <param name="request"></param>
         /// <response code="202">Caso o deposito seja efetuado</response>
+        /// <response code="500">Falha ao efetuar deposito na conta corrente</response>
         [HttpPost("deposito")]
         [ProducesResponseType(202)]
+        [ProducesResponseType(500)]
         public IActionResult PostEfetuarDepositoConta
         (
             [FromBody] TransacaoRequest request
@@ -72,8 +74,10 @@ namespace ContaCorrente.Api.Controllers
         /// </remarks>
         /// <param name="request"></param>
         /// <response code="202">Caso a retirada seja efetuada</response>
+        /// <response code="500">Falha ao efetuar retirada na conta corrente</response>
         [HttpPost("retirada")]
         [ProducesResponseType(202)]
+        [ProducesResponseType(500)]
         public IActionResult PostEfetuarRetiradaConta
         (
             [FromBody] TransacaoRequest request
@@ -106,8 +110,10 @@ namespace ContaCorrente.Api.Controllers
         /// </remarks>
         /// <param name="request"></param>
         /// <response code="202">Caso o pagamento seja efetuado</response>
+        /// <response code="500">Falha ao efetuar pagamento na conta corrente</response>
         [HttpPost("pagamento")]
         [ProducesResponseType(202)]
+        [ProducesResponseType(500)]
         public IActionResult PostEfetuarPagamentoConta
         (
             [FromBody] TransacaoRequest request

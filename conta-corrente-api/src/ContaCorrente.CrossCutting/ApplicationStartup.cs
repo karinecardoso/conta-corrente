@@ -24,8 +24,10 @@ namespace ContaCorrente.CrossCutting
             services.AddCors();
             services.AddMvcCore()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddJsonFormatters();
+                .AddJsonFormatters()
+                .AddApiExplorer();
             services.AddContaCorrenteDbContext(_configuration);
+            services.AddContaCorrenteSwaggerGen();
         }
 
         public void ConfigureContainer(ContainerBuilder builder)
@@ -41,8 +43,9 @@ namespace ContaCorrente.CrossCutting
                 app.UseContaCorrenteSeed();
             }
 
-            app.UseMiddleware<UnhandledExceptionMiddleware>();
+            app.UseContaCorrenteSwagger();
             app.UseContaCorrenteCors();
+            app.UseMiddleware<UnhandledExceptionMiddleware>();
             app.UseMvc();
         }
     }

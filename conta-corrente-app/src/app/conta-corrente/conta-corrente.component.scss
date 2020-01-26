@@ -1,0 +1,12 @@
+.conta-corrente {
+    margin: 15px;
+
+    .info-conta {
+        display: grid;
+    }
+
+    .operacoes-buttons {
+        justify-self: center;
+        margin-top: 15px;
+    }
+}

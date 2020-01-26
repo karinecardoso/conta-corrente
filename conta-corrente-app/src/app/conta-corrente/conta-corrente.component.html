@@ -1,0 +1,55 @@
+<div class="conta-corrente row justify-content-center">
+    <div class="col-4">
+        <div class="info-conta">
+            <span>Agencia: {{ saldo?.agencia }} | Conta: {{ saldo?.numero }}-{{ saldo?.digito }}</span>
+            <span>SALDO DISPONÍVEL</span>
+            <span>{{ saldo?.saldo | currency:'BRL':'symbol':'0.2':'pt' }}</span>
+            <div class="operacoes-buttons">
+                <button type="button" class="btn btn-primary" (click)="onClickOperacao(tipoOperacao.Deposito)">
+                    {{ getLabelTipoOperacao(tipoOperacao.Deposito) }}
+                </button>
+                <button type="button" class="btn btn-primary" (click)="onClickOperacao(tipoOperacao.Retirada)">
+                    {{ getLabelTipoOperacao(tipoOperacao.Retirada) }}
+                </button>
+                <button type="button" class="btn btn-primary" (click)="onClickOperacao(tipoOperacao.Pagamento)">
+                    {{ getLabelTipoOperacao(tipoOperacao.Pagamento) }}
+                </button>
+            </div>
+        </div>
+        <div *ngIf="showOperacao">
+            <span>{{ getLabelTipoOperacao(operacaoSelecionada) }}</span>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label>Valor: </label>
+                    <input currencyMask  formControlName="valor" class="form-control" 
+                        [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" />
+                </div>
+                <div class="form-group">
+                    <label>Descrição: </label>
+                    <input type="text" formControlName="descricao" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" (click)="showOperacao = false">
+                        Cancelar
+                    </button>
+                    <button class="btn btn-primary" [disabled]="this.form.invalid">
+                        Confirmar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-8">
+        <span>EXTRATO</span>
+        <div class="row">
+            <span class="col-3">Data</span>
+            <span class="col-6">Histórico</span>
+            <span class="col-3">Valor</span>
+        </div>
+        <div class="row" *ngFor="let item of extrato">
+            <span class="col-3">{{ item.data | date: 'dd/MM/yyyy'}}</span>
+            <span class="col-6">{{ getLabelTipoOperacao(item.tipo).toUpperCase() }} {{ item.descricao }}</span>
+            <span class="col-3">{{ item.valor | currency:'BRL':'symbol':'0.2':'pt' }}</span>
+        </div>
+    </div>
+</div>

@@ -1,12 +1,36 @@
 .conta-corrente {
-    margin: 15px;
+  margin: 15px;
 
-    .info-conta {
-        display: grid;
-    }
+  .info-conta {
+    display: grid;
+    text-align: center;
+  }
 
-    .operacoes-buttons {
-        justify-self: center;
-        margin-top: 15px;
+  .operacoes-buttons {
+    justify-self: center;
+    margin-top: 15px;
+  }
+
+  .operacao-conta {
+    margin-top: 20px;
+  }
+
+  .btn {
+    margin: 5px;
+  }
+
+  .text-green {
+    color: green;
+  }
+
+  .text-red {
+    color: red;
+  }
+
+  .extrato-conta {
+    .row {
+      border-bottom: 0.5px solid;
+      padding: 5px;
     }
+  }
 }

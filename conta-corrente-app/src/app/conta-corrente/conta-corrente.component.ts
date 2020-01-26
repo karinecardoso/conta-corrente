@@ -53,6 +53,10 @@ export class ContaCorrenteComponent implements OnInit {
     }
   }
 
+  operacaoDebito(tipo: TipoOperacao) {
+    return tipo !== TipoOperacao.Deposito;
+  }
+
   onClickOperacao(tipo: TipoOperacao) {
     this.showOperacao = true;
     this.operacaoSelecionada = tipo;

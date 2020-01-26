@@ -1,27 +1,24 @@
 <div class="conta-corrente row justify-content-center">
     <div class="col-4">
         <div class="info-conta">
-            <span>Agencia: {{ saldo?.agencia }} | Conta: {{ saldo?.numero }}-{{ saldo?.digito }}</span>
+            <h5>Agencia: {{ saldo?.agencia }} | Conta: {{ saldo?.numero }}-{{ saldo?.digito }}</h5>
             <span>SALDO DISPONÍVEL</span>
-            <span>{{ saldo?.saldo | currency:'BRL':'symbol':'0.2':'pt' }}</span>
+            <h3 class="text-green">{{ saldo?.saldo | currency: "BRL":"symbol":"0.2":"pt" }}</h3>
             <div class="operacoes-buttons">
                 <button type="button" class="btn btn-primary" (click)="onClickOperacao(tipoOperacao.Deposito)">
-                    {{ getLabelTipoOperacao(tipoOperacao.Deposito) }}
-                </button>
+                    {{ getLabelTipoOperacao(tipoOperacao.Deposito) }} </button>
                 <button type="button" class="btn btn-primary" (click)="onClickOperacao(tipoOperacao.Retirada)">
-                    {{ getLabelTipoOperacao(tipoOperacao.Retirada) }}
-                </button>
+                    {{ getLabelTipoOperacao(tipoOperacao.Retirada) }} </button>
                 <button type="button" class="btn btn-primary" (click)="onClickOperacao(tipoOperacao.Pagamento)">
-                    {{ getLabelTipoOperacao(tipoOperacao.Pagamento) }}
-                </button>
+                    {{ getLabelTipoOperacao(tipoOperacao.Pagamento) }} </button>
             </div>
         </div>
-        <div *ngIf="showOperacao">
-            <span>{{ getLabelTipoOperacao(operacaoSelecionada) }}</span>
+        <div *ngIf="showOperacao" class="operacao-conta">
+            <h5>{{ getLabelTipoOperacao(operacaoSelecionada) }}</h5>
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <div class="form-group">
                     <label>Valor: </label>
-                    <input currencyMask  formControlName="valor" class="form-control" 
+                    <input currencyMask formControlName="valor" class="form-control"
                         [options]="{ prefix: 'R$ ', thousands: '.', decimal: ',' }" />
                 </div>
                 <div class="form-group">
@@ -29,27 +26,25 @@
                     <input type="text" formControlName="descricao" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <button type="button" class="btn btn-primary" (click)="showOperacao = false">
-                        Cancelar
-                    </button>
-                    <button class="btn btn-primary" [disabled]="this.form.invalid">
-                        Confirmar
-                    </button>
+                    <button type="button" class="btn btn-primary" (click)="showOperacao = false"> Cancelar </button>
+                    <button class="btn btn-primary" [disabled]="this.form.invalid"> Confirmar </button>
                 </div>
             </form>
         </div>
     </div>
-    <div class="col-8">
-        <span>EXTRATO</span>
+    <div class="extrato-conta col-8">
+        <h5 class="text-center">EXTRATO</h5>
         <div class="row">
-            <span class="col-3">Data</span>
-            <span class="col-6">Histórico</span>
-            <span class="col-3">Valor</span>
+            <h6 class="col-3 text-center">Data</h6>
+            <h6 class="col-6">Histórico</h6>
+            <h6 class="col-3 text-right">Valor</h6>
         </div>
         <div class="row" *ngFor="let item of extrato">
-            <span class="col-3">{{ item.data | date: 'dd/MM/yyyy'}}</span>
-            <span class="col-6">{{ getLabelTipoOperacao(item.tipo).toUpperCase() }} {{ item.descricao }}</span>
-            <span class="col-3">{{ item.valor | currency:'BRL':'symbol':'0.2':'pt' }}</span>
+            <span class="col-3 text-center">{{ item.data | date: "dd/MM/yyyy" }}</span>
+            <span class="col-6"> {{ getLabelTipoOperacao(item.tipo).toUpperCase() }} {{ item.descricao }}</span>
+            <span class="col-3 text-right" [ngClass]="{ 'text-red': operacaoDebito(item.tipo) }">
+                {{ operacaoDebito(item.tipo) ? '- ' : ''}}{{ item.valor | currency: "BRL":"symbol":"0.2":"pt" }}
+            </span>
         </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using ContaCorrente.CrossCutting.Api.Middlewares;
 using ContaCorrente.CrossCutting.Extensions.ApplicationBuilder;
 using ContaCorrente.CrossCutting.Extensions.ServiceCollection;
 using Microsoft.AspNetCore.Builder;
@@ -40,6 +41,7 @@ namespace ContaCorrente.CrossCutting
                 app.UseContaCorrenteSeed();
             }
 
+            app.UseMiddleware<UnhandledExceptionMiddleware>();
             app.UseContaCorrenteCors();
             app.UseMvc();
         }

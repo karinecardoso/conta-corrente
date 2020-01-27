@@ -47,7 +47,6 @@ export class OperacaoContaCorrenteService {
   }
 
   private getErrorMessage(error) {
-    debugger;
     if (error.error instanceof ErrorEvent) {
       return error.error.message;
     }

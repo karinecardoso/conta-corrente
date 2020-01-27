@@ -40,9 +40,9 @@ namespace ContaCorrente.CrossCutting
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseContaCorrenteSeed();
             }
 
+            app.UseContaCorrenteSeed();
             app.UseContaCorrenteSwagger();
             app.UseContaCorrenteCors();
             app.UseMiddleware<UnhandledExceptionMiddleware>();
